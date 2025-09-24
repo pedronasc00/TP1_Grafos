@@ -1,4 +1,5 @@
 from grafo import Grafo
+
 def verificar_conectividade_detalhada(grafo):
         print("\n--- VERIFICAÇÃO DE CONECTIVIDADE ---")
         
@@ -6,6 +7,7 @@ def verificar_conectividade_detalhada(grafo):
             print("A redeé CONEXA!")
         else:
             print("A rede não é conexa!")
+            
 def main():
     print("=== SISTEMA TRANSPORTES ABC ===")
     

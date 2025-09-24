@@ -1,5 +1,6 @@
 from leitura import ler_arquivo_grafo
 import sys
+
 class Grafo:
     def __init__ (self, nome_arquivo=None):
         self.vertices = set()
