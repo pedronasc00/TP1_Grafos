@@ -1,33 +1,33 @@
-cidades = set()
-estradas = []
-try:
-    with open('Testes/teste1.txt', 'r', encoding='utf-8') as arq:
-        for linha in arq:
-            linha_limpa = linha.strip()
+def ler_arquivo_grafo(nome_arquivo):
+    cidades = set()
+    estradas = []
 
-            if linha_limpa:
-                partes = linha_limpa.split(',')
+    try:
+        with open(nome_arquivo, 'r', encoding='utf-8') as arq:
+            for linha in arq:
+                linha_limpa = linha.strip()
 
-                if len(partes) == 3:
-                    cidade1 = partes[0]
-                    cidade2 = partes[1]
-                    distancia = partes[2]
+                if linha_limpa:
+                    partes = linha_limpa.split(',')
 
-                    cidades.add(cidade1)
-                    cidades.add(cidade2)
-
-                    estradas.append((cidade1, cidade2, distancia))
-                else:
-                    print("Linha não está feita corretamente")
-except FileNotFoundError:
-    print("Arquivo para teste não foi encontrado")
-
-print("Cidades (Vértices) do arquivo:")
-cidades_ordenadas = sorted(list(cidades))
-print(cidades_ordenadas)
-print(f"Numero de cidades encontradas: {len(cidades)}")
-
-print("\nEstradas (Arestas) encontradas:")
-for estrada in estradas:
-    print(f"De {estrada[0]} para {estrada[1]} tem distância de {estrada[2]} km")
-print(f"Total de estrada: {len(estradas)}")
+                    if len(partes) == 3:
+                        cidade1 = partes[0]
+                        cidade2 = partes[1]
+                        distancia = int(partes[2].strip())
+                        
+                        cidades.add(cidade1)
+                        cidades.add(cidade2)
+                        estradas.append((cidade1, cidade2, distancia))
+                    else:
+                        print("Linha não está feita corretamente")
+        
+        
+        print(f"Arquivo {nome_arquivo} lido com sucesso!")
+        return cidades, estradas
+        
+    except FileNotFoundError:
+        print(f"Arquivo {nome_arquivo} não encontrado")
+        return set(), []
+    except Exception as e:
+        print(f"Erro ao ler arquivo: {e}")
+        return set(), []
