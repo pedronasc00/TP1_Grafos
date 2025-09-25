@@ -98,3 +98,34 @@ class Grafo:
         for vizinho, _ in self.adjacencia.get(vertice, []):
             if vizinho not in visitados:
                 self.dfs(vizinho, visitados)
+
+    def encontrar_cidades_criticas(self):
+        visitado = {v: False for v in self.vertices}
+        tempo_descoberta = {v: float('inf') for v in self.vertices}
+        tempo_baixo = {v: float('inf') for v in self.vertices}
+        pais = {v: None for v in self.vertices}
+        cidades_criticas = set()
+        self.contador_tempo = 0
+
+        def dsf_cidade_critica(u):
+            visitado[u] = True
+            self.contador_tempo += 1
+            tempo_descoberta[u] = tempo_baixo[u] = self.contador_tempo
+            filhos = 0 
+
+            for v, _ in self.adjacencia.get(u, []):
+                if not visitado[v]:
+                    filhos += 1
+                    pais[v] = u
+                    dsf_cidade_critica(v)
+                    tempo_baixo[u] = min(tempo_baixo[u], tempo_baixo[v])
+                    if pais[u] is None and filhos > 1:
+                        cidades_criticas.add(u)
+                    if pais[u] is not None and tempo_baixo[v] >= tempo_descoberta[u]:
+                        cidades_criticas.add(u)
+                elif v != pais[u]:
+                    tempo_baixo[u] = min(tempo_baixo[u], tempo_descoberta[v])
+        for i in self.vertices:
+            if not visitado[i]:
+                dsf_cidade_critica(i)
+        return cidades_criticas

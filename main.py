@@ -4,7 +4,7 @@ def verificar_conectividade_detalhada(grafo):
         print("\n--- VERIFICAÇÃO DE CONECTIVIDADE ---")
         
         if grafo.conexo():
-            print("A redeé CONEXA!")
+            print("A rede é CONEXA!")
         else:
             print("A rede não é conexa!")
             
@@ -42,6 +42,13 @@ def main():
 
     #Testar conectividade
     verificar_conectividade_detalhada(grafo)
+            
+    #Testar cidades_criticas
+    cidades_criticas = grafo.encontrar_cidades_criticas()
+    if cidades_criticas:
+        print(f"Cidades críticas: {', '.join(cidades_criticas)}")
+    else:
+        print("Não há cidades críticas na rede.")
             
        
 if __name__ == "__main__":
