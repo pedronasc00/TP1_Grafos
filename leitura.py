@@ -14,17 +14,16 @@ def ler_arquivo_grafo(nome_arquivo):
                         cidade1 = partes[0]
                         cidade2 = partes[1]
                         distancia = int(partes[2].strip())
-                        
+
                         cidades.add(cidade1)
                         cidades.add(cidade2)
                         estradas.append((cidade1, cidade2, distancia))
                     else:
                         print("Linha não está feita corretamente")
-        
-        
+
         print(f"Arquivo {nome_arquivo} lido com sucesso!")
         return cidades, estradas
-        
+
     except FileNotFoundError:
         print(f"Arquivo {nome_arquivo} não encontrado")
         return set(), []
